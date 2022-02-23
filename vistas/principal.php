@@ -1,6 +1,15 @@
 <?php
+require_once("controladores/controlador_contacto.php");
+
 class VistaPrincipal
 {
+    private $controler;
+
+    public function __construct()
+    {
+        $this->controler = new ControladorContacto();
+        $this->controler->peticionSalir();
+    }
 
     public function head($estilos = 0)
     {
@@ -101,7 +110,13 @@ class VistaPrincipal
                                         </ul>
                                     </li>
                                     <li><a href="agent.html">Agent</a></li>
-                                    <li><a href="login.php">Iniciar Sesión</a></li>
+                                    <?php
+                                    if ($this->controler->estaLogeado()) {
+                                        echo '<li><a href="?exit=1">Salir</a></li>';
+                                    }else{
+                                        echo '<li><a href="login.php">Iniciar Sesión</a></li>';
+                                    }
+                                    ?>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
