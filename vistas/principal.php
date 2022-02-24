@@ -1,14 +1,22 @@
 <?php
 require_once("controladores/controlador_contacto.php");
+require_once("controladores/controlador_propiedad.php");
 
 class VistaPrincipal
 {
-    private $controler;
+    private $controlerCon;
+    private $controlerPro;
 
     public function __construct()
     {
-        $this->controler = new ControladorContacto();
-        $this->controler->peticionSalir();
+        $this->controlerCon = new ControladorContacto();
+        $this->controlerPro = new ControladorPropiedad();
+        $this->controlerCon->peticionSalir();
+    }
+
+    public function getControlerPro()
+    {
+        return $this->controlerPro;
     }
 
     public function head($estilos = 0)
@@ -111,9 +119,9 @@ class VistaPrincipal
                                     </li>
                                     <li><a href="agent.html">Agent</a></li>
                                     <?php
-                                    if ($this->controler->estaLogeado()) {
+                                    if ($this->controlerCon->estaLogeado()) {
                                         echo '<li><a href="?exit=1">Salir</a></li>';
-                                    }else{
+                                    } else {
                                         echo '<li><a href="login.php">Iniciar Sesión</a></li>';
                                     }
                                     ?>
@@ -134,75 +142,35 @@ class VistaPrincipal
                 <aside id="fh5co-hero" class="js-fullheight">
                     <div class="flexslider js-fullheight">
                         <ul class="slides">
-                            <li style="background-image: url(images/img_bg_1.jpg);">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
-                                            <div class="slider-text-inner">
-                                                <div class="desc">
-                                                    <span class="status">Sale</span>
-                                                    <h1>New House in Canada, UK1</h1>
-                                                    <h2 class="price">$4,000.00</h2>
-                                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                                    <p class="details">
-                                                        <span>2000 ft sq</span>
-                                                        <span>4 Bedrooms</span>
-                                                        <span>3 Bathrooms</span>
-                                                        <span>2 Garage</span>
-                                                    </p>
-                                                    <p><a class="btn btn-primary btn-lg" href="#">Learn More</a></p>
+                            <?php
+                            foreach ($this->controlerPro->propiedadesDestacadas() as $propiedad) {
+                            ?>
+                                <li style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
+                                                <div class="slider-text-inner">
+                                                    <div class="desc">
+                                                        <span class="status"><?= $propiedad->getEstado() ?></span>
+                                                        <h1><?= $propiedad->getNombre() ?></h1>
+                                                        <h2 class="price"><?= $propiedad->getPrecio() ?>€</h2>
+                                                        <p><?= $propiedad->getDescripcion() ?></p>
+                                                        <p class="details">
+                                                            <span><?= $propiedad->getTamanyo() ?> metros</span>
+                                                            <span><?= $propiedad->getHabitaciones() ?> Bedrooms</span>
+                                                            <span><?= $propiedad->getBanyos() ?> Bathrooms</span>
+                                                            <span><?= $propiedad->getGarage() ? "Tiene garage" : "No tiene garage" ?></span>
+                                                        </p>
+                                                        <p><a class="btn btn-primary btn-lg" href="#">Learn More</a></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li style="background-image: url(images/img_bg_2.jpg);">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
-                                            <div class="slider-text-inner">
-                                                <div class="desc">
-                                                    <span class="status">Rent</span>
-                                                    <h1>New House in Canada, UK2</h1>
-                                                    <h2 class="price">$2000/mos</h2>
-                                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                                    <p class="details">
-                                                        <span>2000 ft sq</span>
-                                                        <span>4 Bedrooms</span>
-                                                        <span>3 Bathrooms</span>
-                                                        <span>2 Garage</span>
-                                                    </p>
-                                                    <p><a class="btn btn-primary btn-lg" href="#">Learn More</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li style="background-image: url(images/img_bg_3.jpg);">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
-                                            <div class="slider-text-inner">
-                                                <div class="desc">
-                                                    <span class="status">Sale</span>
-                                                    <h1>New House in Canada, UK3</h1>
-                                                    <h2 class="price">$4,000.00</h2>
-                                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                                                    <p class="details">
-                                                        <span>2000 ft sq</span>
-                                                        <span>4 Bedrooms</span>
-                                                        <span>3 Bathrooms</span>
-                                                        <span>2 Garage</span>
-                                                    </p>
-                                                    <p><a class="btn btn-primary btn-lg" href="#">Learn More</a></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
                 </aside>
@@ -215,129 +183,152 @@ class VistaPrincipal
                 <div id="fh5co-search-map">
                     <div class="search-property">
                         <div class="s-holder">
-                            <h2>Search Properties</h2>
-                            <div class="row">
-                                <div class="col-xxs-12 col-xs-12">
-                                    <div class="input-field">
-                                        <label for="from">Keyword:</label>
-                                        <input type="text" class="form-control" id="from-place" placeholder="Any" />
+                            <form action="properties.php" method="post">
+                                <h2>Search Properties</h2>
+                                <div class="row">
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <div class="input-field">
+                                            <label for="from">Keyword:</label>
+                                            <input type="text" class="form-control" id="from-place" name="key" placeholder="Any" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <section>
+                                            <label for="class">Property Status:</label>
+                                            <select class="cs-select cs-skin-border" name="estado">
+                                                <option value="" disabled selected>Any</option>
+                                                <option value="renta">Renta</option>
+                                                <option value="venta">Venta</option>
+                                            </select>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <section>
+                                            <label for="class">Property Type:</label>
+                                            <select class="cs-select cs-skin-border input-half" name="tipo">
+                                                <option value="" disabled selected>Any</option>
+                                                <?php
+                                                foreach ($this->controlerPro->tiposPropiedad() as $tipo) {
+                                                    echo "<option value='$tipo'>$tipo</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <div class="input-field">
+                                            <label for="from">Location:</label>
+                                            <input type="text" class="form-control" id="from-place" name="direccion" placeholder="Any" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <section>
+                                            <label for="class">Price:</label>
+                                            <div class="wide">
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="precio1">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="500">500</option>
+                                                    <option value="1000">1000</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="100000">100000</option>
+                                                    <option value="500000">500000</option>
+                                                    <option value="1000000">1000000</option>
+                                                    <option value="2000000">2000000</option>
+                                                </select>
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="precio2">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="1000">1000</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="100000">100000</option>
+                                                    <option value="500000">500000</option>
+                                                    <option value="1000000">1000000</option>
+                                                    <option value="2000000">2000000</option>
+                                                    <option value="3000000">3000000</option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <section>
+                                            <label for="class">Bedrooms:</label>
+                                            <div class="wide">
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="habitaciones1">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="habitaciones1">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <section>
+                                            <label for="class">Bathrooms:</label>
+                                            <div class="wide">
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="banyos1">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="banyos2">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12">
+                                        <section>
+                                            <label for="class">Area:</label>
+                                            <div class="wide">
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="area1">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="30">30</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="300">300</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                                <select class="cs-select cs-select-half cs-skin-border input-half" name="area2">
+                                                    <option value="" disabled selected>Any</option>
+                                                    <option value="30">30</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="300">300</option>
+                                                    <option value="500">500</option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-12 text-center">
+                                        <p><input class="btn btn-primary btn-lg" type="submit" name="buscar" value="Buscar">
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Property Status:</label>
-                                        <select class="cs-select cs-skin-border">
-                                            <option value="" disabled selected>Any</option>
-                                            <option value="1">Rent</option>
-                                            <option value="2">Sale</option>
-                                        </select>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Property Type:</label>
-                                        <select class="cs-select cs-skin-border input-half">
-                                            <option value="" disabled selected>Any</option>
-                                            <option value="1">Building</option>
-                                            <option value="2">Office</option>
-                                        </select>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <div class="input-field">
-                                        <label for="from">Location:</label>
-                                        <input type="text" class="form-control" id="from-place" placeholder="Any" />
-                                    </div>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Price:</label>
-                                        <div class="wide">
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Bedrooms:</label>
-                                        <div class="wide">
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Bathrooms:</label>
-                                        <div class="wide">
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Area:</label>
-                                        <div class="wide">
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12">
-                                    <section>
-                                        <label for="class">Parking spots:</label>
-                                        <div class="wide">
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                            <select class="cs-select cs-select-half cs-skin-border input-half">
-                                                <option value="" disabled selected>Any</option>
-                                                <option value="1">Building</option>
-                                                <option value="2">Office</option>
-                                            </select>
-                                        </div>
-                                    </section>
-                                </div>
-                                <div class="col-xxs-12 col-xs-12 text-center">
-                                    <p><a class="btn btn-primary btn-lg" href="#">Learn More</a></p>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="map" style="background-image: url(images/cover_bg_1.jpg);">
@@ -393,6 +384,7 @@ class VistaPrincipal
 
         public function mostrarPropiedadesCompleta()
         {
+            global $filtro;
             ?>
                 <div id="fh5co-properties" class="fh5co-section-gray">
                     <div class="container">
@@ -403,126 +395,29 @@ class VistaPrincipal
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 animate-box">
-                                <div class="property">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/property-1.jpg);">
-                                        <span class="status">Sale</span>
-                                        <ul class="list-details">
-                                            <li>2000 ft sq
-                                            <li>
-                                            <li>5 Bedroom:</li>
-                                            <li>4 Bathroom:</li>
-                                            <li>3 Garage:</li>
-                                        </ul>
-                                    </a>
-                                    <div class="property-details">
-                                        <h3>Properties Near in Beach</h3>
-                                        <span class="price">$3,000</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores.</p>
-                                        <span class="address"><i class="icon-map"></i>Thomas Street, St. Louis, MO 8990, USA</span>
+                            <?php
+                            foreach ($this->controlerPro->mostrarPropiedades($filtro) as $propiedad) {
+                            ?>
+                                <div class="col-md-4 animate-box">
+                                    <div class="property">
+                                        <a href="#" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
+                                            <span class="status"><?= $propiedad->getEstado() ?></span>
+                                            <ul class="list-details">
+                                                <li><?= $propiedad->getTamanyo() ?> metros</li>
+                                                <li><?= $propiedad->getHabitaciones() ?> Bedroom:</li>
+                                                <li><?= $propiedad->getBanyos() ?> Bathroom:</li>
+                                                <li><?= $propiedad->getGarage() ? "Tiene garage" : "No tiene garage" ?></li>
+                                            </ul>
+                                        </a>
+                                        <div class="property-details">
+                                            <h3><?= $propiedad->getNombre() ?></h3>
+                                            <span class="price"><?= $propiedad->getPrecio() ?> €</span>
+                                            <p><?= substr($propiedad->getDescripcion(),0,150)."..."  ?></p>
+                                            <span class="address"><i class="icon-map"></i><?= $propiedad->getDireccion() ?></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 animate-box">
-                                <div class="property">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/property-2.jpg);">
-                                        <span class="status">Rent</span>
-                                        <ul class="list-details">
-                                            <li>2000 ft sq
-                                            <li>
-                                            <li>5 Bedroom:</li>
-                                            <li>4 Bathroom:</li>
-                                            <li>3 Garage:</li>
-                                        </ul>
-                                    </a>
-                                    <div class="property-details">
-                                        <h3>Modern House at NZ</h3>
-                                        <span class="price">$200/mos</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores.</p>
-                                        <span class="address"><i class="icon-map"></i>Thomas Street, St. Louis, MO 8990, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 animate-box">
-                                <div class="property">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/property-3.jpg);">
-                                        <span class="status">Sale</span>
-                                        <ul class="list-details">
-                                            <li>2000 ft sq
-                                            <li>
-                                            <li>5 Bedroom:</li>
-                                            <li>4 Bathroom:</li>
-                                            <li>3 Garage:</li>
-                                        </ul>
-                                    </a>
-                                    <div class="property-details">
-                                        <h3>Bonggalo House</h3>
-                                        <span class="price">$3,000</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores.</p>
-                                        <span class="address"><i class="icon-map"></i>Thomas Street, St. Louis, MO 8990, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 animate-box">
-                                <div class="property">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/property-4.jpg);">
-                                        <span class="status">Sale</span>
-                                        <ul class="list-details">
-                                            <li>2000 ft sq
-                                            <li>
-                                            <li>5 Bedroom:</li>
-                                            <li>4 Bathroom:</li>
-                                            <li>3 Garage:</li>
-                                        </ul>
-                                    </a>
-                                    <div class="property-details">
-                                        <h3>Properties at Alaska</h3>
-                                        <span class="price">$3,000</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores.</p>
-                                        <span class="address"><i class="icon-map"></i>Thomas Street, St. Louis, MO 8990, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 animate-box">
-                                <div class="property">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/property-5.jpg);">
-                                        <span class="status">Rent</span>
-                                        <ul class="list-details">
-                                            <li>2000 ft sq
-                                            <li>
-                                            <li>5 Bedroom:</li>
-                                            <li>4 Bathroom:</li>
-                                            <li>3 Garage:</li>
-                                        </ul>
-                                    </a>
-                                    <div class="property-details">
-                                        <h3>Modern Properties</h3>
-                                        <span class="price">$200/mos</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores.</p>
-                                        <span class="address"><i class="icon-map"></i>Thomas Street, St. Louis, MO 8990, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 animate-box">
-                                <div class="property">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/property-6.jpg);">
-                                        <span class="status">Sale</span>
-                                        <ul class="list-details">
-                                            <li>2000 ft sq
-                                            <li>
-                                            <li>5 Bedroom:</li>
-                                            <li>4 Bathroom:</li>
-                                            <li>3 Garage:</li>
-                                        </ul>
-                                    </a>
-                                    <div class="property-details">
-                                        <h3>House at the Top of Mountain</h3>
-                                        <span class="price">$3,000</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores.</p>
-                                        <span class="address"><i class="icon-map"></i>Thomas Street, St. Louis, MO 8990, USA</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

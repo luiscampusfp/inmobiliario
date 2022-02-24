@@ -1,5 +1,6 @@
 <?php
 require_once('modelos/usuario.php');
+require_once('modelos/propiedad.php');
 
 class MySQLConexion
 {
@@ -12,7 +13,7 @@ class MySQLConexion
 
     public function insertarUsuario($usuario, $contrasenya)
     {
-         return mysqli_query($this->conexion, "Insert into usuario values ('" . $usuario->getNombre() . "', '" . $usuario->getEmail() . "','" . $usuario->getTipo() . "', '$contrasenya')");
+        return mysqli_query($this->conexion, "Insert into usuario values ('" . $usuario->getNombre() . "', '" . $usuario->getEmail() . "','" . $usuario->getTipo() . "', '$contrasenya')");
     }
 
     public function comprobar($email, $contrasenya)
@@ -22,5 +23,85 @@ class MySQLConexion
             return new Usuario($data['nombre'], $data['email'], $data['tipo']);
         }
         return false;
+    }
+
+    public function propiedadesDestacadas()
+    {
+        $propiedades = array();
+        $result = mysqli_query($this->conexion, "Select * from propiedad where idusuario is null order by precio desc limit 3");
+        while ($data = mysqli_fetch_assoc($result)) {
+            $nombre = $data['nombre'];
+            $tipo = $data['tipo'];
+            $precio = $data['precio'];
+            $descripcion = $data['descripcion'];
+            $tamanyo = $data['tamanyo'];
+            $habitaciones = $data['habitaciones'];
+            $banyos = $data['banyos'];
+            $garage = $data['garage'];
+            $direccion = $data['direccion'];
+            $estado = $data['estado'];
+            $imagen = $data['imagen'];
+            $comprado = $data['idusuario'] != null ? true : false;
+            array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
+        }
+        return $propiedades;
+    }
+
+    public function tiposPropiedad()
+    {
+        $tipos = array();
+        $result = mysqli_query($this->conexion, "Select * from propiedad group by tipo");
+        while ($data = mysqli_fetch_assoc($result)) {
+            array_push($tipos, $data['tipo']);
+        }
+        return $tipos;
+    }
+
+    public function obtenerPropiedades($filtro)
+    {
+        if ($filtro == null) {
+            $result = mysqli_query($this->conexion, "Select * from propiedad");
+        } else {
+            $sql = "Select * from propiedad where ";
+            $cantF = 0;
+            if (isset($filtro['key'])) {
+                $sql .= $cantF != 0 ? "and " : "";
+                $sql .= "nombre like '%" . $filtro['key'] . "%' ";
+                $cantF++;
+            }
+            if (isset($filtro['tipo'])) {
+                $sql .= $cantF != 0 ? "and " : "";
+                $sql .= "tipo = '" . $filtro['tipo'] . "' ";
+                $cantF++;
+            }
+            if (isset($filtro['precio1'])) {
+                $sql .= $cantF != 0 ? "and " : "";
+                $sql .= "precio >= '" . $filtro['precio1'] . "' ";
+                $cantF++;
+            }
+            if (isset($filtro['precio2'])) {
+                $sql .= $cantF != 0 ? "and " : "";
+                $sql .= "precio <= '" . $filtro['precio2'] . "' ";
+                $cantF++;
+            }
+            $result = mysqli_query($this->conexion, $sql);
+        }
+        $propiedades = array();
+        while ($data = mysqli_fetch_assoc($result)) {
+            $nombre = $data['nombre'];
+            $tipo = $data['tipo'];
+            $precio = $data['precio'];
+            $descripcion = $data['descripcion'];
+            $tamanyo = $data['tamanyo'];
+            $habitaciones = $data['habitaciones'];
+            $banyos = $data['banyos'];
+            $garage = $data['garage'];
+            $direccion = $data['direccion'];
+            $estado = $data['estado'];
+            $imagen = $data['imagen'];
+            $comprado = $data['idusuario'] != null ? true : false;
+            array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
+        }
+        return $propiedades;
     }
 }
