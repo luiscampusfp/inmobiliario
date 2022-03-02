@@ -84,6 +84,8 @@ class VistaPrincipal
 	<![endif]-->
 
             <?php
+
+
             if ($estilos != 0) {
                 echo $estilos;
             }
@@ -108,7 +110,7 @@ class VistaPrincipal
                                 <ul class="sf-menu" id="fh5co-primary-menu">
                                     <li class="active"><a href="index.php">Home</a></li>
                                     <li>
-                                        <a href="properties.html" class="fh5co-sub-ddown">Properties</a>
+                                        <a href="../properties.php" class="fh5co-sub-ddown">Properties</a>
                                         <ul class="fh5co-sub-menu">
                                             <li><a href="#">Family</a></li>
                                             <li><a href="#">CSS3 &amp; HTML5</a></li>
@@ -125,7 +127,7 @@ class VistaPrincipal
                                         echo '<li><a href="login.php">Iniciar Sesión</a></li>';
                                     }
                                     ?>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="contacto.php">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -412,7 +414,7 @@ class VistaPrincipal
                                         <div class="property-details">
                                             <h3><?= $propiedad->getNombre() ?></h3>
                                             <span class="price"><?= $propiedad->getPrecio() ?> €</span>
-                                            <p><?= substr($propiedad->getDescripcion(),0,150)."..."  ?></p>
+                                            <p><?= substr($propiedad->getDescripcion(), 0, 150) . "..."  ?></p>
                                             <span class="address"><i class="icon-map"></i><?= $propiedad->getDireccion() ?></span>
                                         </div>
                                     </div>
@@ -436,37 +438,95 @@ class VistaPrincipal
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit est facilis maiores, perspiciatis accusamus asperiores sint consequuntur debitis.</p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 animate-box">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Name">
+                            <form action="" method="post">
+                                <div class="row">
+                                    <div class="col-md-12 animate-box">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="NombreContacto" placeholder="Name">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Email">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="CorreoContacto" placeholder="Email">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" id="" name="MensajeContacto" cols="30" rows="7" placeholder="Message"></textarea>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input type="submit" value="Send Message" class="btn btn-primary">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Send Message" name="EnviarContacto" class="btn btn-primary">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="half-bg" style="background-image: url(images/cover_bg_2.jpg);"></div>
                 </div>
             <?php
+            $this->controlerCon->peticionContactar();
+        }
+
+        public function contactoGrande()
+        {
+            ?>
+                <div id="fh5co-contact">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h3>Contact Information</h3>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-6">
+                                <h3 class="section-title">Our Address</h3>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                <ul class="contact-info">
+                                    <li><i class="icon-location-pin"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
+                                    <li><i class="icon-phone2"></i>+ 1235 2355 98</li>
+                                    <li><i class="icon-mail"></i><a href="#">info@yoursite.com</a></li>
+                                    <li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
+                                </ul>
+                            </div>
+                            <form action="" method="post">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="NombreContacto" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="CorreoContacto" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="" name="MensajeContacto" cols="30" rows="7" placeholder="Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="Send Message" name="EnviarContacto" class="btn btn-primary">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            $this->controlerCon->peticionContactar();
         }
 
         public function footer()
@@ -505,12 +565,12 @@ class VistaPrincipal
                                 <div class="col-md-3">
                                     <h3 class="section-title">Newsletter</h3>
                                     <p>Subscribe for our newsletter</p>
-                                    <form class="form-inline" id="fh5co-header-subscribe">
+                                    <form class="form-inline" method="POST" id="fh5co-header-subscribe">
                                         <div class="row">
                                             <div class="col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="email" placeholder="Enter your email">
-                                                    <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
+                                                    <input type="text" class="form-control" name="campoCorreo" id="email" placeholder="Enter your email">
+                                                    <button type="submit" name="botonSuscribir" class="btn btn-default"><i class="icon-paper-plane"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -564,8 +624,14 @@ class VistaPrincipal
         <script src="js/selectFx.js"></script>
 
 
+
         <!-- Main JS -->
         <script src="js/main.js"></script>
+
+        <?php
+            $this->controlerCon->peticionSubscribirse();
+
+        ?>
 <?php
         }
     }

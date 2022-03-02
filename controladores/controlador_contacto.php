@@ -70,4 +70,39 @@ class ControladorContacto
             header("location: index.php");
         }
     }
+
+    public function subscripcion($correo)
+    {
+        return $this->con->insertarSuscripcion($correo);
+    }
+
+    public function peticionSubscribirse(){
+        if (isset($_POST['botonSuscribir'])){
+            $correo=$_POST['campoCorreo'];
+            if($this->subscripcion($correo)){
+                echo "<script>alert(' Te has subscrito correctamente ')</script>";
+            } else {
+                echo "<script>alert(' Este correo ya existe ')</script>";
+            }
+        }
+    }
+
+    public function contactar($contacto)
+    {
+        return $this->con->insertarMensaje($contacto);
+    }
+
+    public function peticionContactar(){
+        if (isset($_POST['EnviarContacto'])){
+            $correo=$_POST['CorreoContacto'];
+            $nombre=$_POST['NombreContacto'];
+            $mensaje=$_POST['MensajeContacto'];
+            $contacto = new Contacto($nombre, $correo, $mensaje);
+            if($this->contactar($contacto)){
+                echo "<script>alert(' El mensaje se ha enviado ')</script>";
+            } else {
+                echo "<script>alert(' ERROR ')</script>";
+            }
+        }
+    }
 }

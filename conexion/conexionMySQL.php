@@ -1,6 +1,7 @@
 <?php
 require_once('modelos/usuario.php');
 require_once('modelos/propiedad.php');
+require_once('modelos/contacto.php');
 
 class MySQLConexion
 {
@@ -16,9 +17,19 @@ class MySQLConexion
         return mysqli_query($this->conexion, "Insert into usuario values ('" . $usuario->getNombre() . "', '" . $usuario->getEmail() . "','" . $usuario->getTipo() . "', '$contrasenya')");
     }
 
+    public function insertarSuscripcion($correo)
+    {
+        return mysqli_query($this->conexion, "Insert into suscriptor values ('$correo')");
+    }
+
+    public function insertarMensaje($contacto)
+    {
+        return mysqli_query($this->conexion, "Insert into contacto (`nombre`, `correo`, `mensaje`) values ('". $contacto->getNombre() ."','". $contacto->getCorreo() ."','". $contacto->getMensaje() ."')");
+    }
+
     public function comprobar($email, $contrasenya)
     {
-        $result = mysqli_query($this->conexion, "Select * from usuario where email='$email' and contrasenya='$contrasenya'");
+        $result = mysqli_query($this->conexion, "Select * from usuario where correo='$email' and contrasenya='$contrasenya'");
         if ($data = mysqli_fetch_assoc($result)) {
             return new Usuario($data['nombre'], $data['email'], $data['tipo']);
         }
