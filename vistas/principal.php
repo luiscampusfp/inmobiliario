@@ -565,12 +565,21 @@ class VistaPrincipal
                                 <div class="col-md-3">
                                     <h3 class="section-title">Newsletter</h3>
                                     <p>Subscribe for our newsletter</p>
+<<<<<<< HEAD
+                                    <form class="form-inline" method="POST" id="fh5co-header-subscribe">
+                                        <div class="row">
+                                            <div class="col-md-12 col-md-offset-0">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="campoCorreo" id="email" placeholder="Enter your email">
+                                                    <button type="submit" name="botonSuscribir" class="btn btn-default"><i class="icon-paper-plane"></i></button>
+=======
                                     <form method="POST" action="" class="form-inline" id="fh5co-header-subscribe">
                                         <div class="row">
                                             <div class="col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="subscribe" id="email" placeholder="Enter your email">
                                                     <button type="submit" name="subSend" class="btn btn-default"><i class="icon-paper-plane"></i></button>
+>>>>>>> fbc44ede30a955de1d9eb27b2a54a2f07b0b1fcb
                                                 </div>
                                             </div>
                                         </div>
@@ -627,8 +636,15 @@ class VistaPrincipal
 
         <!-- Main JS -->
         <script src="js/main.js"></script>
+<<<<<<< HEAD
+
+        <?php
+            $this->controlerCon->peticionSubscribirse();
+
+=======
         <?php
             $this->controlerCon->peticionSubscribirtor();
+>>>>>>> fbc44ede30a955de1d9eb27b2a54a2f07b0b1fcb
         ?>
 <?php
         }
