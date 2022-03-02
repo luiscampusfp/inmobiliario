@@ -412,7 +412,7 @@ class VistaPrincipal
                                         <div class="property-details">
                                             <h3><?= $propiedad->getNombre() ?></h3>
                                             <span class="price"><?= $propiedad->getPrecio() ?> €</span>
-                                            <p><?= substr($propiedad->getDescripcion(),0,150)."..."  ?></p>
+                                            <p><?= substr($propiedad->getDescripcion(), 0, 150) . "..."  ?></p>
                                             <span class="address"><i class="icon-map"></i><?= $propiedad->getDireccion() ?></span>
                                         </div>
                                     </div>
@@ -505,12 +505,12 @@ class VistaPrincipal
                                 <div class="col-md-3">
                                     <h3 class="section-title">Newsletter</h3>
                                     <p>Subscribe for our newsletter</p>
-                                    <form class="form-inline" id="fh5co-header-subscribe">
+                                    <form method="POST" action="" class="form-inline" id="fh5co-header-subscribe">
                                         <div class="row">
                                             <div class="col-md-12 col-md-offset-0">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="email" placeholder="Enter your email">
-                                                    <button type="submit" class="btn btn-default"><i class="icon-paper-plane"></i></button>
+                                                    <input type="text" class="form-control" name="subscribe" id="email" placeholder="Enter your email">
+                                                    <button type="submit" name="subSend" class="btn btn-default"><i class="icon-paper-plane"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -562,10 +562,13 @@ class VistaPrincipal
         <!-- CS Select -->
         <script src="js/classie.js"></script>
         <script src="js/selectFx.js"></script>
-
+        
 
         <!-- Main JS -->
         <script src="js/main.js"></script>
+        <?php
+            $this->controlerCon->peticionSubscribirtor();
+        ?>
 <?php
         }
     }

@@ -70,4 +70,21 @@ class ControladorContacto
             header("location: index.php");
         }
     }
+
+    public function subscripcion($email)
+    {
+        return $this->con->insertarSubscriptor($email);
+    }
+
+    public function peticionSubscribirtor()
+    {
+        if(isset($_POST['subSend'])){
+            $email=$_POST['subscribe'];
+            if($this->subscripcion($email)){
+                echo "<script>alert('Te has subscrito correctamente');</script>";
+            }else{
+                echo "<script>alert('Ya te has subscrito');</script>";
+            }
+        }
+    }
 }
