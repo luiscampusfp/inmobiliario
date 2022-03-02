@@ -115,4 +115,9 @@ class MySQLConexion
         }
         return $propiedades;
     }
+
+    public function insertarSubscriptor($email)
+    {
+        return mysqli_query($this->conexion, "Insert into subscriptor (email) values ('$email')");
+    }
 }

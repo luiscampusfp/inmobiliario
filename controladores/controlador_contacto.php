@@ -71,37 +71,19 @@ class ControladorContacto
         }
     }
 
-    public function subscripcion($correo)
+    public function subscripcion($email)
     {
-        return $this->con->insertarSuscripcion($correo);
+        return $this->con->insertarSubscriptor($email);
     }
 
-    public function peticionSubscribirse(){
-        if (isset($_POST['botonSuscribir'])){
-            $correo=$_POST['campoCorreo'];
-            if($this->subscripcion($correo)){
-                echo "<script>alert(' Te has subscrito correctamente ')</script>";
-            } else {
-                echo "<script>alert(' Este correo ya existe ')</script>";
-            }
-        }
-    }
-
-    public function contactar($contacto)
+    public function peticionSubscribirtor()
     {
-        return $this->con->insertarMensaje($contacto);
-    }
-
-    public function peticionContactar(){
-        if (isset($_POST['EnviarContacto'])){
-            $correo=$_POST['CorreoContacto'];
-            $nombre=$_POST['NombreContacto'];
-            $mensaje=$_POST['MensajeContacto'];
-            $contacto = new Contacto($nombre, $correo, $mensaje);
-            if($this->contactar($contacto)){
-                echo "<script>alert(' El mensaje se ha enviado ')</script>";
-            } else {
-                echo "<script>alert(' ERROR ')</script>";
+        if(isset($_POST['subSend'])){
+            $email=$_POST['subscribe'];
+            if($this->subscripcion($email)){
+                echo "<script>alert('Te has subscrito correctamente');</script>";
+            }else{
+                echo "<script>alert('Ya te has subscrito');</script>";
             }
         }
     }
