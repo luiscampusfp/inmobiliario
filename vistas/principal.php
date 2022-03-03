@@ -385,33 +385,21 @@ class VistaPrincipal
                             </div>
                         </div>
                         <div class="row">
+                            <?php
+                            foreach ($this->controlerPro->propiedadesPopulares() as $propiedad) {
+                            ?>
                             <div class="col-md-4 animate-box">
-                                <a href="#" class="fh5co-property" style="background-image: url(images/property-1.jpg);">
-                                    <span class="status">Sale</span>
+                                <a href="#" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
+                                    <span class="status"><?= $propiedad->getEstado()?></span>
                                     <div class="prop-details">
-                                        <span class="price">$3,000</span>
-                                        <h3>Properties Near in Beach, USA California</h3>
+                                        <span class="price"><?= $propiedad->getPrecio()?></span>
+                                        <h3><?= $propiedad->getDescripcion()?></h3>
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-md-4 animate-box">
-                                <a href="#" class="fh5co-property" style="background-image: url(images/property-2.jpg);">
-                                    <span class="status">Rent</span>
-                                    <div class="prop-details">
-                                        <span class="price">$200/mos</span>
-                                        <h3>Modern House at NZ</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-md-4 animate-box">
-                                <a href="#" class="fh5co-property" style="background-image: url(images/property-3.jpg);">
-                                    <span class="status">Sale</span>
-                                    <div class="prop-details">
-                                        <span class="price">$3,000</span>
-                                        <h3>Bonggalo House</h3>
-                                    </div>
-                                </a>
-                            </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -599,6 +587,14 @@ class VistaPrincipal
                                 <div class="col-md-3">
                                     <h3 class="section-title">Newsletter</h3>
                                     <p>Subscribe for our newsletter</p>
+<<<<<<< HEAD
+                                    <form class="form-inline" method="POST" id="fh5co-header-subscribe">
+                                        <div class="row">
+                                            <div class="col-md-12 col-md-offset-0">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="campoCorreo" id="email" placeholder="Enter your email">
+                                                    <button type="submit" name="botonSuscribir" class="btn btn-default"><i class="icon-paper-plane"></i></button>
+=======
                                     <form method="POST" action="" class="form-inline" id="fh5co-header-subscribe">
                                         <div class="row">
                                             <div class="col-md-12 col-md-offset-0">
@@ -606,6 +602,7 @@ class VistaPrincipal
                                                     <input type="text" class="form-control" name="subscribe" id="email" placeholder="Enter your email">
                                                     <button type="submit" name="subSend" class="btn btn-default"><i class="icon-paper-plane"></i></button>
 
+>>>>>>> dfb2ca5ddbeb55e5f5088d0b11d4a43dd54edddf
                                                 </div>
                                             </div>
                                         </div>
@@ -663,7 +660,12 @@ class VistaPrincipal
         <!-- Main JS -->
         <script src="js/main.js"></script>
 
+<<<<<<< HEAD
+        <?php
+=======
 <?php
+>>>>>>> dfb2ca5ddbeb55e5f5088d0b11d4a43dd54edddf
             $this->controlerCon->peticionSubscribirse();
         }
     }
+?>
