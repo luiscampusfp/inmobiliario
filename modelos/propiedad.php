@@ -1,6 +1,7 @@
 <?php
 class Propiedad
 {
+    private $id;
     private $nombre;
     private $tipo;
     private $precio;
@@ -15,8 +16,9 @@ class Propiedad
     private $comprado;
 
 
-    public function __construct($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen,$comprado)
+    public function __construct($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado, $id = null)
     {
+        $this->id = $id;
         $this->nombre = $nombre;
         $this->tipo = $tipo;
         $this->precio = $precio;
@@ -29,6 +31,11 @@ class Propiedad
         $this->estado = $estado;
         $this->imagen = $imagen;
         $this->comprado = $comprado;
+    }
+
+    public function getID()
+    {
+        return $this->id;
     }
 
     public function getNombre()

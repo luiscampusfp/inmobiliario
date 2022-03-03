@@ -163,7 +163,7 @@ class VistaPrincipal
                                                             <span><?= $propiedad->getBanyos() ?> Bathrooms</span>
                                                             <span><?= $propiedad->getGarage() ? "Tiene garage" : "No tiene garage" ?></span>
                                                         </p>
-                                                        <p><a class="btn btn-primary btn-lg" href="#">Learn More</a></p>
+                                                        <p><a class="btn btn-primary btn-lg" href="properties.php?id=<?= $propiedad->getID() ?>">Learn More</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,6 +201,7 @@ class VistaPrincipal
                                                         <span>3 Bathrooms</span>
                                                         <span>No tiene garage</span>
                                                     </p>
+                                                    <p><a class="btn btn-primary btn-lg" href="#">Comprar o rentar</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -389,7 +390,7 @@ class VistaPrincipal
                             foreach ($this->controlerPro->propiedadesPopulares() as $propiedad) {
                             ?>
                                 <div class="col-md-4 animate-box">
-                                    <a href="#" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
+                                    <a href="properties.php?id=<?= $propiedad->getID() ?>" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
                                         <span class="status"><?= $propiedad->getEstado() ?></span>
                                         <div class="prop-details">
                                             <span class="price"><?= $propiedad->getPrecio() ?></span>
@@ -424,7 +425,7 @@ class VistaPrincipal
                             ?>
                                 <div class="col-md-4 animate-box">
                                     <div class="property">
-                                        <a href="#" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
+                                        <a href="properties.php?id=<?= $propiedad->getID() ?>" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
                                             <span class="status"><?= $propiedad->getEstado() ?></span>
                                             <ul class="list-details">
                                                 <li><?= $propiedad->getTamanyo() ?> metros</li>

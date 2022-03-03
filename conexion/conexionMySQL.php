@@ -24,7 +24,7 @@ class MySQLConexion
 
     public function insertarMensaje($contacto)
     {
-       return mysqli_query($this->conexion, "Insert into contacto (`nombre`, `email`, `mensaje`) values ('". $contacto->getNombre() ."','". $contacto->getCorreo() ."','". $contacto->getMensaje() ."')");
+        return mysqli_query($this->conexion, "Insert into contacto (`nombre`, `email`, `mensaje`) values ('" . $contacto->getNombre() . "','" . $contacto->getCorreo() . "','" . $contacto->getMensaje() . "')");
     }
 
     public function comprobar($email, $contrasenya)
@@ -41,6 +41,7 @@ class MySQLConexion
         $propiedades = array();
         $result = mysqli_query($this->conexion, "Select * from propiedad where idusuario is null order by precio desc limit 3");
         while ($data = mysqli_fetch_assoc($result)) {
+            $id = $data['id'];
             $nombre = $data['nombre'];
             $tipo = $data['tipo'];
             $precio = $data['precio'];
@@ -53,7 +54,7 @@ class MySQLConexion
             $estado = $data['estado'];
             $imagen = $data['imagen'];
             $comprado = $data['idusuario'] != null ? true : false;
-            array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
+            array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado, $id));
         }
         return $propiedades;
     }
@@ -63,6 +64,7 @@ class MySQLConexion
         $propiedadesPopulares = array();
         $result = mysqli_query($this->conexion, "Select * from propiedad where idusuario is null and estado = 'Venta' order by precio desc limit 3");
         while ($data = mysqli_fetch_assoc($result)) {
+            $id = $data['id'];
             $nombre = $data['nombre'];
             $tipo = $data['tipo'];
             $precio = $data['precio'];
@@ -75,7 +77,7 @@ class MySQLConexion
             $estado = $data['estado'];
             $imagen = $data['imagen'];
             $comprado = $data['idusuario'] != null ? true : false;
-            array_push($propiedadesPopulares, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
+            array_push($propiedadesPopulares, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado, $id));
         }
         return $propiedadesPopulares;
     }
@@ -121,6 +123,7 @@ class MySQLConexion
         }
         $propiedades = array();
         while ($data = mysqli_fetch_assoc($result)) {
+            $id = $data['id'];
             $nombre = $data['nombre'];
             $tipo = $data['tipo'];
             $precio = $data['precio'];
@@ -133,7 +136,7 @@ class MySQLConexion
             $estado = $data['estado'];
             $imagen = $data['imagen'];
             $comprado = $data['idusuario'] != null ? true : false;
-            array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
+            array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado, $id));
         }
         return $propiedades;
     }
