@@ -110,7 +110,7 @@ class VistaPrincipal
                                 <ul class="sf-menu" id="fh5co-primary-menu">
                                     <li class="active"><a href="index.php">Home</a></li>
                                     <li>
-                                        <a href="../properties.php" class="fh5co-sub-ddown">Properties</a>
+                                        <a href="properties.php" class="fh5co-sub-ddown">Properties</a>
                                         <ul class="fh5co-sub-menu">
                                             <li><a href="#">Family</a></li>
                                             <li><a href="#">CSS3 &amp; HTML5</a></li>
@@ -173,6 +173,40 @@ class VistaPrincipal
                             <?php
                             }
                             ?>
+                        </ul>
+                    </div>
+                </aside>
+            <?php
+        }
+
+        public function properti()
+        {
+            ?>
+                <aside id="fh5co-hero" class="js-fullheight">
+                    <div class="flexslider js-fullheight">
+                        <ul class="slides">
+                            <li style="background-image: url(images/renta1.jpg);">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
+                                            <div class="slider-text-inner">
+                                                <div class="desc">
+                                                    <span class="status">renta</span>
+                                                    <h1>Nombre</h1>
+                                                    <h2 class="price"> 20000 €</h2>
+                                                    <p>Texto</p>
+                                                    <p class="details">
+                                                        <span>100 metros</span>
+                                                        <span>4 Bedrooms</span>
+                                                        <span>3 Bathrooms</span>
+                                                        <span>No tiene garage</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </aside>
