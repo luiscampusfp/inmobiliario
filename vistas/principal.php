@@ -660,11 +660,7 @@ class VistaPrincipal
         <!-- Main JS -->
         <script src="js/main.js"></script>
 
-<<<<<<< HEAD
         <?php
-=======
-<?php
->>>>>>> dfb2ca5ddbeb55e5f5088d0b11d4a43dd54edddf
             $this->controlerCon->peticionSubscribirse();
         }
     }
