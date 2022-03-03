@@ -145,4 +145,25 @@ class MySQLConexion
     {
         return mysqli_query($this->conexion, "Insert into subscriptor (correo) values ('$email')");
     }
+
+    public function obtenerPropiedad($id)
+    {
+        $result = mysqli_query($this->conexion, "Select * from propiedad where id=$id");
+        if ($data = mysqli_fetch_assoc($result)) {
+            $id = $data['id'];
+            $nombre = $data['nombre'];
+            $tipo = $data['tipo'];
+            $precio = $data['precio'];
+            $descripcion = $data['descripcion'];
+            $tamanyo = $data['tamanyo'];
+            $habitaciones = $data['habitaciones'];
+            $banyos = $data['banyos'];
+            $garage = $data['garage'];
+            $direccion = $data['direccion'];
+            $estado = $data['estado'];
+            $imagen = $data['imagen'];
+            $comprado = $data['idusuario'] != null ? true : false;
+            return new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado, $id);
+        }
+    }
 }

@@ -181,27 +181,29 @@ class VistaPrincipal
 
         public function properti()
         {
+            global $id;
+            $propiedad = $this->controlerPro->obtenerPropiedad($id);
             ?>
                 <aside id="fh5co-hero" class="js-fullheight">
                     <div class="flexslider js-fullheight">
                         <ul class="slides">
-                            <li style="background-image: url(images/renta1.jpg);">
+                            <li style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-4 col-md-offset-4 col-md-pull-4 js-fullheight slider-text">
                                             <div class="slider-text-inner">
                                                 <div class="desc">
-                                                    <span class="status">renta</span>
-                                                    <h1>Nombre</h1>
-                                                    <h2 class="price"> 20000 €</h2>
-                                                    <p>Texto</p>
+                                                    <span class="status"><?= $propiedad->getEstado() ?></span>
+                                                    <h1><?= $propiedad->getNombre() ?></h1>
+                                                    <h2 class="price"><?= $propiedad->getPrecio() ?>€</h2>
+                                                    <p><?= $propiedad->getDescripcion() ?></p>
                                                     <p class="details">
-                                                        <span>100 metros</span>
-                                                        <span>4 Bedrooms</span>
-                                                        <span>3 Bathrooms</span>
-                                                        <span>No tiene garage</span>
+                                                        <span><?= $propiedad->getTamanyo() ?> metros</span>
+                                                        <span><?= $propiedad->getHabitaciones() ?> Bedrooms</span>
+                                                        <span><?= $propiedad->getBanyos() ?> Bathrooms</span>
+                                                        <span><?= $propiedad->getGarage() ? "Tiene garage" : "No tiene garage" ?></span>
                                                     </p>
-                                                    <p><a class="btn btn-primary btn-lg" href="#">Comprar o rentar</a></p>
+                                                    <p><a class="btn btn-primary btn-lg" href="properties.php"><?= $propiedad->getEstado() == "venta" ? "Comprar" : "Rentar" ?></a></p>
                                                 </div>
                                             </div>
                                         </div>

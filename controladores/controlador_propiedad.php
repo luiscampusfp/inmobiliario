@@ -52,4 +52,17 @@ class ControladorPropiedad
             $filtro['area2'] =  isset($_POST['area2']) ? $_POST['area2'] : null;
         }
     }
+
+    public function obtenerPropiedad($id)
+    {
+        return $this->con->obtenerPropiedad($id);
+    }
+
+    public function peticionPropiedad()
+    {
+        if (isset($_GET['id'])) {
+            global $id;
+            $id = $_GET['id'];
+        }
+    }
 }
