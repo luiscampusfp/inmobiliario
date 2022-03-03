@@ -48,7 +48,7 @@ class MySQLConexion
             $tamanyo = $data['tamanyo'];
             $habitaciones = $data['habitaciones'];
             $banyos = $data['banyos'];
-            $garage = $data['garage'];
+            $garage = $data['garaje'];
             $direccion = $data['direccion'];
             $estado = $data['estado'];
             $imagen = $data['imagen'];
@@ -56,6 +56,28 @@ class MySQLConexion
             array_push($propiedades, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
         }
         return $propiedades;
+    }
+
+    public function propiedadesPopulares()
+    {
+        $propiedadesPopulares = array();
+        $result = mysqli_query($this->conexion, "Select * from propiedad where idusuario is null and estado = 'Venta' order by precio desc limit 3");
+        while ($data = mysqli_fetch_assoc($result)) {
+            $nombre = $data['nombre'];
+            $tipo = $data['tipo'];
+            $precio = $data['precio'];
+            $descripcion = $data['descripcion'];
+            $tamanyo = $data['tamanyo'];
+            $habitaciones = $data['habitaciones'];
+            $banyos = $data['banyos'];
+            $garage = $data['garaje'];
+            $direccion = $data['direccion'];
+            $estado = $data['estado'];
+            $imagen = $data['imagen'];
+            $comprado = $data['idusuario'] != null ? true : false;
+            array_push($propiedadesPopulares, new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado));
+        }
+        return $propiedadesPopulares;
     }
 
     public function tiposPropiedad()
@@ -118,6 +140,6 @@ class MySQLConexion
 
     public function insertarSubscriptor($email)
     {
-        return mysqli_query($this->conexion, "Insert into subscriptor (email) values ('$email')");
+        return mysqli_query($this->conexion, "Insert into subscriptor (correo) values ('$email')");
     }
 }

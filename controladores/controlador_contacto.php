@@ -71,7 +71,6 @@ class ControladorContacto
         }
     }
 
-<<<<<<< HEAD
     public function subscripcion($correo)
     {
         return $this->con->insertarSuscripcion($correo);
@@ -103,21 +102,6 @@ class ControladorContacto
                 echo "<script>alert(' El mensaje se ha enviado ')</script>";
             } else {
                 echo "<script>alert(' ERROR ')</script>";
-=======
-    public function subscripcion($email)
-    {
-        return $this->con->insertarSubscriptor($email);
-    }
-
-    public function peticionSubscribirtor()
-    {
-        if(isset($_POST['subSend'])){
-            $email=$_POST['subscribe'];
-            if($this->subscripcion($email)){
-                echo "<script>alert('Te has subscrito correctamente');</script>";
-            }else{
-                echo "<script>alert('Ya te has subscrito');</script>";
->>>>>>> fbc44ede30a955de1d9eb27b2a54a2f07b0b1fcb
             }
         }
     }

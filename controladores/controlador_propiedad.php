@@ -19,6 +19,11 @@ class ControladorPropiedad
         return $this->con->propiedadesDestacadas();
     }
 
+    public function propiedadesPopulares()
+    {
+        return $this->con->propiedadesPopulares();
+    }
+
     public function tiposPropiedad()
     {
         return $this->con->tiposPropiedad();
