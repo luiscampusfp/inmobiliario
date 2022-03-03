@@ -24,7 +24,7 @@ class MySQLConexion
 
     public function insertarMensaje($contacto)
     {
-        return mysqli_query($this->conexion, "Insert into contacto (`nombre`, `correo`, `mensaje`) values ('". $contacto->getNombre() ."','". $contacto->getCorreo() ."','". $contacto->getMensaje() ."')");
+       return mysqli_query($this->conexion, "Insert into contacto (`nombre`, `email`, `mensaje`) values ('". $contacto->getNombre() ."','". $contacto->getCorreo() ."','". $contacto->getMensaje() ."')");
     }
 
     public function comprobar($email, $contrasenya)
