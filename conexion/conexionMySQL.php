@@ -48,7 +48,7 @@ class MySQLConexion
             $tamanyo = $data['tamanyo'];
             $habitaciones = $data['habitaciones'];
             $banyos = $data['banyos'];
-            $garage = $data['garaje'];
+            $garage = $data['garage'];
             $direccion = $data['direccion'];
             $estado = $data['estado'];
             $imagen = $data['imagen'];
@@ -70,7 +70,7 @@ class MySQLConexion
             $tamanyo = $data['tamanyo'];
             $habitaciones = $data['habitaciones'];
             $banyos = $data['banyos'];
-            $garage = $data['garaje'];
+            $garage = $data['garage'];
             $direccion = $data['direccion'];
             $estado = $data['estado'];
             $imagen = $data['imagen'];

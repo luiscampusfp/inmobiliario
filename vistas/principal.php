@@ -388,15 +388,15 @@ class VistaPrincipal
                             <?php
                             foreach ($this->controlerPro->propiedadesPopulares() as $propiedad) {
                             ?>
-                            <div class="col-md-4 animate-box">
-                                <a href="#" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
-                                    <span class="status"><?= $propiedad->getEstado()?></span>
-                                    <div class="prop-details">
-                                        <span class="price"><?= $propiedad->getPrecio()?></span>
-                                        <h3><?= $propiedad->getDescripcion()?></h3>
-                                    </div>
-                                </a>
-                            </div>
+                                <div class="col-md-4 animate-box">
+                                    <a href="#" class="fh5co-property" style="background-image: url(images/<?= $propiedad->getImagen() ?>);">
+                                        <span class="status"><?= $propiedad->getEstado() ?></span>
+                                        <div class="prop-details">
+                                            <span class="price"><?= $propiedad->getPrecio() ?></span>
+                                            <h3><?= $propiedad->getNombre() ?></h3>
+                                        </div>
+                                    </a>
+                                </div>
                             <?php
                             }
                             ?>
@@ -587,22 +587,12 @@ class VistaPrincipal
                                 <div class="col-md-3">
                                     <h3 class="section-title">Newsletter</h3>
                                     <p>Subscribe for our newsletter</p>
-<<<<<<< HEAD
-                                    <form class="form-inline" method="POST" id="fh5co-header-subscribe">
-                                        <div class="row">
-                                            <div class="col-md-12 col-md-offset-0">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="campoCorreo" id="email" placeholder="Enter your email">
-                                                    <button type="submit" name="botonSuscribir" class="btn btn-default"><i class="icon-paper-plane"></i></button>
-=======
                                     <form method="POST" action="" class="form-inline" id="fh5co-header-subscribe">
                                         <div class="row">
                                             <div class="col-md-12 col-md-offset-0">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="subscribe" id="email" placeholder="Enter your email">
                                                     <button type="submit" name="subSend" class="btn btn-default"><i class="icon-paper-plane"></i></button>
-
->>>>>>> dfb2ca5ddbeb55e5f5088d0b11d4a43dd54edddf
                                                 </div>
                                             </div>
                                         </div>
@@ -660,7 +650,7 @@ class VistaPrincipal
         <!-- Main JS -->
         <script src="js/main.js"></script>
 
-        <?php
+<?php
             $this->controlerCon->peticionSubscribirse();
         }
     }
