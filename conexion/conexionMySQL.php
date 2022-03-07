@@ -29,7 +29,7 @@ class MySQLConexion
 
     public function comprobar($email, $contrasenya)
     {
-        $result = mysqli_query($this->conexion, "Select * from usuario where correo='$email' and contrasenya='$contrasenya'");
+        $result = mysqli_query($this->conexion, "Select * from usuario where email='$email' and contrasenya='$contrasenya'");
         if ($data = mysqli_fetch_assoc($result)) {
             return new Usuario($data['nombre'], $data['email'], $data['tipo']);
         }
@@ -143,7 +143,7 @@ class MySQLConexion
 
     public function insertarSubscriptor($email)
     {
-        return mysqli_query($this->conexion, "Insert into subscriptor (correo) values ('$email')");
+        return mysqli_query($this->conexion, "Insert into subscriptor (email) values ('$email')");
     }
 
     public function obtenerPropiedad($id)
