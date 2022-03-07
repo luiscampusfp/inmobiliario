@@ -107,4 +107,22 @@ class ControladorContacto
             }
         }
     }
+
+    public function comprarPropiedad($idpropiedad)
+    {
+        return $this->con->actualizarPropiedad($idpropiedad, $_SESSION['usuario']->getEmail());
+    }
+
+    public function peticionComprar()
+    {
+        if (isset($_GET['idbuy'])) {
+            global $id;
+            $id = $_GET['idbuy'];
+            if ($this->estaLogeado()) {
+                $this->comprarPropiedad($_GET['idbuy']);
+            } else {
+                header("location:login.php");
+            }
+        }
+    }
 }

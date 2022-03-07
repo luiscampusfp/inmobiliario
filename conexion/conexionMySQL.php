@@ -166,4 +166,10 @@ class MySQLConexion
             return new Propiedad($nombre, $tipo, $precio, $descripcion, $tamanyo, $habitaciones, $banyos, $garage, $direccion, $estado, $imagen, $comprado, $id);
         }
     }
+
+    public function actualizarPropiedad($propiedad, $usuario)
+    {
+        echo "Update propiedad set idusuario=$usuario where id= $propiedad";
+        return mysqli_query($this->conexion, "Update propiedad set idusuario='$usuario' where id= $propiedad");
+    }
 }

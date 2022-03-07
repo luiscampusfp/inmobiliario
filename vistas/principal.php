@@ -19,6 +19,11 @@ class VistaPrincipal
         return $this->controlerPro;
     }
 
+    public function getControlerCon()
+    {
+        return $this->controlerCon;
+    }
+
     public function head($estilos = 0)
     {
 ?>
@@ -203,7 +208,12 @@ class VistaPrincipal
                                                         <span><?= $propiedad->getBanyos() ?> Bathrooms</span>
                                                         <span><?= $propiedad->getGarage() ? "Tiene garage" : "No tiene garage" ?></span>
                                                     </p>
-                                                    <p><a class="btn btn-primary btn-lg" href="properties.php"><?= $propiedad->getEstado() == "venta" ? "Comprar" : "Rentar" ?></a></p>
+                                                    <?php
+                                                    if (!$propiedad->getComprado()) {
+                                                    ?>
+                                                        <p><a class="btn btn-primary btn-lg" href="properties.php?idbuy=<?= $propiedad->getID() ?>"><?= $propiedad->getEstado() == "venta" ? "Comprar" : "Rentar" ?></a></p>
+                                                    <?php
+                                                    } ?>
                                                 </div>
                                             </div>
                                         </div>
